@@ -9,10 +9,10 @@ public class PointDataMapper {
 
     public Point issuePointCommandToPoint(PointIssueCommand issuePointCommand) {
         Point point = Point.builder()
-                .pointPolicyNo(issuePointCommand.getPointPolicyNo())
+                .policyId(issuePointCommand.getPointPolicyNo())
                 .amount(issuePointCommand.getAmount())
                 .lifeSpan(issuePointCommand.getLifeSpan())
-                .userNo(issuePointCommand.getUserNo())
+                .userId(issuePointCommand.getUserNo())
                 .build();
         return point;
     }

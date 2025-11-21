@@ -8,7 +8,6 @@ import com.point.system.domain.valueobject.PointPolicyIssueMethod;
 import com.point.system.domain.valueobject.PointPolicyPointType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
@@ -31,15 +30,15 @@ class PointPolicyRepositoryTest {
     void shouldNotFindPointPolicyByNo() {
 
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            pointPolicyRepository.findPointPolicyByNo(1L);
+            pointPolicyRepository.findPointPolicyByPolicyId(1L);
         });
     }
 
     @Test
-    void shouldReturnPointPolicyByNo() {
+    void shouldReturnPointPolicyById() {
 
         PointPolicyEntity pointPolicyEntity = PointPolicyEntity.builder()
-                .pointPolicyNo(1L)
+                .policyId(1L)
                 .pointName("테스트 포인트")
                 .pointType(PointPolicyPointType.FREE)
                 .amount(3000L)
@@ -50,7 +49,7 @@ class PointPolicyRepositoryTest {
                 .build();
 
         when(this.pointPolicyJpaRepository.findById(anyLong())).thenReturn(Optional.of(pointPolicyEntity));
-        PointPolicy pointPolicy = pointPolicyRepository.findPointPolicyByNo(1L);
+        PointPolicy pointPolicy = pointPolicyRepository.findPointPolicyByPolicyId(1L);
         System.out.println(pointPolicy);
     }
 }

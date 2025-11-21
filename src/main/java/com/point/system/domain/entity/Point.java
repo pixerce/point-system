@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 @Setter
 public class Point {
 
-    private final Long userNo;
-    private final Long pointPolicyNo;
+    private final Long userId;
+    private final Long policyId;
     private final Long amount;
     private final Integer lifeSpan;
     private final String comment;

@@ -10,25 +10,26 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @AllArgsConstructor
 @Builder
 @Setter
 public class PointPolicy {
-    private final Long pointPolicyNo;
+    private final Long policy_id;
     private final Long amount;
     private final PointPolicyAmountType amountType;
+    private final Long minAmount;
+    private final Long maxAmount;
     private final PointPolicyPointType pointType;
     private final PointPolicyIssueMethod issueMethod;
     private final LocalDateTime startDate;
     private final Integer lifeSpan;
 
-    private Long amountLimit;
+    private Long maxCumulativeAmount;
     private PointUsageChannel pointUsageChannel;
 
     public Boolean hasAmountLimit() {
-        return amountLimit != null;
+        return maxCumulativeAmount != null;
     }
 }

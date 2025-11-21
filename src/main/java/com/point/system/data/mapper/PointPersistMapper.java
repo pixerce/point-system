@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 public class PointPersistMapper {
     public UserPointEntity pointToUserPointEntity(Point point) {
         UserPointEntity userPointEntity = UserPointEntity.builder()
-                .userNo(point.getUserNo())
-                .pointPolicyNo(point.getPointPolicyNo())
+                .userId(point.getUserId())
+                .policyId(point.getPolicyId())
                 .amount(point.getAmount())
                 .balance(point.getBalance())
                 .startDate(point.getStartDate())
-                .expirationDate(point.getExpirationDate())
+                .expireDate(point.getExpirationDate())
                 .build();
 
         return userPointEntity;

@@ -1,23 +1,24 @@
 package com.point.system.data.mapper;
 
-import com.point.system.data.entity.PointUsageChannelEntity;
+import com.point.system.data.entity.PointUsagePolicyEntity;
 import com.point.system.data.entity.PointPolicyEntity;
-import com.point.system.data.entity.PointTypeLimitEntity;
+import com.point.system.data.entity.PointTypePolicyEntity;
 import com.point.system.domain.entity.PointPolicy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
 public class PointPolicyPersistMapper {
 
     public PointPolicy policyEntitiesToPointPolicy(PointPolicyEntity pointPolicyEntity
-            , List<PointUsageChannelEntity> pointChannelEntityList
-            , List<PointTypeLimitEntity> pointTypeLimitEntityList) {
+            , List<PointUsagePolicyEntity> pointChannelEntityList
+            , List<PointTypePolicyEntity> pointTypePolicyEntityList) {
 
         PointPolicy pointPolicy = PointPolicy.builder()
-                .pointPolicyNo(pointPolicyEntity.getPointPolicyNo())
+                .policy_id(pointPolicyEntity.getPolicyId())
                 .pointType(pointPolicyEntity.getPointType())
                 .amount(pointPolicyEntity.getAmount())
                 .amountType(pointPolicyEntity.getAmountType())
@@ -26,17 +27,17 @@ public class PointPolicyPersistMapper {
                 .issueMethod(pointPolicyEntity.getIssueMethod())
                 .build();
 
-        Optional<PointTypeLimitEntity> optionalPointTypeLimitEntity = pointTypeLimitEntityList.stream()
+        Optional<PointTypePolicyEntity> optionalPointTypeLimitEntity = pointTypePolicyEntityList.stream()
                 .filter(limit -> limit.getPointType() == pointPolicyEntity.getPointType())
                 .findAny();
         if (optionalPointTypeLimitEntity.isPresent())
-            pointPolicy.setAmountLimit(optionalPointTypeLimitEntity.get().getAmountLimit());
+            pointPolicy.setMaxCumulativeAmount(optionalPointTypeLimitEntity.get().getMaxCumulativeAmount());
 
-        Optional<PointUsageChannelEntity> optionalPointUsageChannelEntity = pointChannelEntityList.stream()
-                .filter(channel -> channel.getPointPolicyNo() == pointPolicyEntity.getPointPolicyNo())
+        Optional<PointUsagePolicyEntity> optionalPointUsageChannelEntity = pointChannelEntityList.stream()
+                .filter(usage -> Objects.equals(usage.getPolicyId(), pointPolicyEntity.getPolicyId()))
                 .findAny();
         if (optionalPointUsageChannelEntity.isPresent())
-            pointPolicy.setPointUsageChannel(optionalPointUsageChannelEntity.get().getPointChannel());
+            pointPolicy.setPointUsageChannel(optionalPointUsageChannelEntity.get().getUsageType());
 
         return pointPolicy;
     }

@@ -1,5 +1,6 @@
 package com.point.system.data.entity;
 
+import com.point.system.domain.valueobject.TransactionType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,29 +12,28 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user_point", schema = "point")
+@Table(name = "point_transaction", schema = "point")
 @Entity
 @ToString
-public class UserPointEntity {
+public class PointTransactionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userPointId;
+    private Long transactionId;
 
-    private Long userId;
-    private Long policyId;
+    private Long userPointId;
+    private Long referenceId;
     private Long amount;
-    private Long balance;
-    private LocalDateTime startDate;
-    private LocalDateTime expireDate;
+    private TransactionType transactionType;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime failureReason;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserPointEntity that = (UserPointEntity) o;
+        PointTransactionEntity that = (PointTransactionEntity) o;
         return userPointId.equals(that.userPointId);
     }
 
