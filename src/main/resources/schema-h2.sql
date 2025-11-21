@@ -13,6 +13,25 @@ CREATE TABLE IF NOT EXISTS point.point_policy (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS point.point_usage_channel (
+    point_usage_channel_no BIGINT PRIMARY KEY AUTO_INCREMENT ,
+    point_policy_no BIGINT NOT NULL  ,
+    point_channel ENUM('ORDER') DEFAULT 'ORDER' ,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    description VARCHAR DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS point.point_type_limit (
+    point_type_limit_no BIGINT PRIMARY KEY AUTO_INCREMENT ,
+    point_type ENUM('FREE', 'CASH') DEFAULT 'FREE' ,
+    amount_limit BIGINT DEFAULT NULL,
+    is_active CHAR DEFAULT 'Y',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    description VARCHAR DEFAULT NULL
+);
+
 CREATE TABLE IF NOT EXISTS point.user_point (
     user_point_no BIGINT PRIMARY KEY AUTO_INCREMENT ,
     user_no BIGINT COMMENT '회원 번호' ,

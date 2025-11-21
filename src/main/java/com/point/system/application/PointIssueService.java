@@ -34,7 +34,6 @@ public class PointIssueService {
      * @param issuePointCommand
      */
     private PointPolicy checkPointPolicy(PointIssueCommand issuePointCommand) {
-        PointPolicy pointPolicy = this.pointPolicyRepository.findPointPolicyByNo(issuePointCommand.getPointPolicyNo());
-        return pointPolicy;
+        return this.pointPolicyRepository.findPointPolicyByNo(issuePointCommand.getPointPolicyNo());
     }
 }

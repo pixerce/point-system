@@ -1,16 +1,21 @@
 package com.point.system.domain.entity;
 
+import com.point.system.domain.valueobject.PointUsageChannel;
 import com.point.system.domain.valueobject.PointPolicyAmountType;
 import com.point.system.domain.valueobject.PointPolicyIssueMethod;
 import com.point.system.domain.valueobject.PointPolicyPointType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
+@Setter
 public class PointPolicy {
     private final Long pointPolicyNo;
     private final Long amount;
@@ -20,7 +25,10 @@ public class PointPolicy {
     private final LocalDateTime startDate;
     private final Integer lifeSpan;
 
-    private final List<PointTypeLimit> pointTypeLimitList;
-    private final List<PointDepartment> pointDepartmentList;
+    private Long amountLimit;
+    private PointUsageChannel pointUsageChannel;
 
+    public Boolean hasAmountLimit() {
+        return amountLimit != null;
+    }
 }

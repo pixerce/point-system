@@ -28,16 +28,16 @@ class PointIssueServiceTest {
     private PointIssueService pointIssueService;
     @Autowired
     private UserPointJpaRepository userPointJpaRepository;
-    @MockitoBean
-    public PointPolicyRepository pointPolicyRepository;
+//    @MockitoBean
+//    public PointPolicyRepository pointPolicyRepository;
 
     @Test
     public void shouldIssuePoint() {
 
         PointPolicy pointPolicy
-                = new PointPolicy(5L, 1000L, PointPolicyAmountType.FIXED, PointPolicyPointType.FREE
+                = new PointPolicy(1L, 1000L, PointPolicyAmountType.FIXED, PointPolicyPointType.FREE
                 , PointPolicyIssueMethod.MANUAL, LocalDateTime.now(), 10, null, null);
-        when(this.pointPolicyRepository.findPointPolicyByNo(anyLong())).thenReturn(pointPolicy);
+//        when(this.pointPolicyRepository.findPointPolicyByNo(anyLong())).thenReturn(pointPolicy);
 
         PointIssueCommand issuePointCommand
                 = new PointIssueCommand(1L, pointPolicy.getPointPolicyNo(), pointPolicy.getAmount(), pointPolicy.getLifeSpan(), "포인트 지급 테스트");
