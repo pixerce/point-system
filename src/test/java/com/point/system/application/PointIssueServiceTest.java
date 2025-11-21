@@ -5,6 +5,9 @@ import com.point.system.application.port.output.PointPolicyRepository;
 import com.point.system.data.entity.UserPointEntity;
 import com.point.system.data.repository.UserPointJpaRepository;
 import com.point.system.domain.entity.PointPolicy;
+import com.point.system.domain.valueobject.PointPolicyAmountType;
+import com.point.system.domain.valueobject.PointPolicyIssueMethod;
+import com.point.system.domain.valueobject.PointPolicyPointType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +35,8 @@ class PointIssueServiceTest {
     public void shouldIssuePoint() {
 
         PointPolicy pointPolicy
-                = new PointPolicy(5L, 1000L, "FIXED", "FREE"
-                , "MANUAL", LocalDateTime.now(), 10, null, null);
+                = new PointPolicy(5L, 1000L, PointPolicyAmountType.FIXED, PointPolicyPointType.FREE
+                , PointPolicyIssueMethod.MANUAL, LocalDateTime.now(), 10, null, null);
         when(this.pointPolicyRepository.findPointPolicyByNo(anyLong())).thenReturn(pointPolicy);
 
         PointIssueCommand issuePointCommand
