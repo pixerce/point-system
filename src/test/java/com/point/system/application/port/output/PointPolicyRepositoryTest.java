@@ -14,6 +14,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
@@ -32,6 +33,8 @@ class PointPolicyRepositoryTest {
         Exception exception = assertThrows(RuntimeException.class, () -> {
             pointPolicyRepository.findPointPolicyByPolicyId(1L);
         });
+
+        assertEquals("포인트 정책을 찾을 수 없음", exception.getMessage());
     }
 
     @Test
@@ -50,6 +53,6 @@ class PointPolicyRepositoryTest {
 
         when(this.pointPolicyJpaRepository.findById(anyLong())).thenReturn(Optional.of(pointPolicyEntity));
         PointPolicy pointPolicy = pointPolicyRepository.findPointPolicyByPolicyId(1L);
-        System.out.println(pointPolicy);
+        assertThat(pointPolicy).isNotNull();
     }
 }
